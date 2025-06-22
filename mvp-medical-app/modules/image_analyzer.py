@@ -36,3 +36,19 @@ def save_overlay_png(original_image, segmentation_mask, output_path, color=(255,
     """Save an overlay PNG image combining original and mask."""
     overlay = create_overlay_image(original_image, segmentation_mask, color, alpha)
     overlay.save(output_path, format="PNG")
+
+
+
+def mask_patient_info(image, height_ratio=0.05):
+    """Return a copy of the image with the top portion masked.
+
+    This performs a simple black-out of the specified fraction of
+    the image height to obscure burned-in patient identifiers.
+    """
+    arr = image.numpy().copy()
+    mask_height = max(1, int(arr.shape[0] * height_ratio))
+    if arr.ndim == 3:
+        arr[:mask_height, :, :] = 0
+    else:
+        arr[:mask_height, :] = 0
+    return ants.from_numpy(arr, origin=image.origin, spacing=image.spacing, direction=image.direction)
