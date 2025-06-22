@@ -4,7 +4,7 @@ This repository contains an MVP for a Streamlit-based medical image analysis app
 The project follows the plan outlined in `Kyotoyama_Medical_Image_Analyzer最新版MVP設計・進捗管理.md`.
 
 The application allows users to upload medical images, perform segmentation with ANTsPyNet,
-and generate a structured report using the Gemini API.
+and generate a structured report using the GPT-4.1mini API.
 
 ## Disclaimer
 
