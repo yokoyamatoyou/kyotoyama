@@ -4,6 +4,7 @@ from PIL import Image
 import openai
 import io
 import base64
+from modules.image_analyzer import mask_patient_info
 
 
 class LesionFinding(BaseModel):
@@ -24,7 +25,8 @@ def generate_structured_report(original_image, probability_mask, api_key):
     """Generate a structured report using GPT-4.1mini."""
     client = openai.OpenAI(api_key=api_key)
 
-    original_pil = Image.fromarray(original_image.numpy().astype("uint8"))
+    masked = mask_patient_info(original_image)
+    original_pil = Image.fromarray(masked.numpy().astype("uint8"))
     mask_pil = Image.fromarray((probability_mask.numpy() * 255).astype("uint8"))
 
     orig_url = _image_to_data_url(original_pil)
