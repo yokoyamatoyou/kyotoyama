@@ -6,6 +6,12 @@ The project follows the plan outlined in `Kyotoyama_Medical_Image_Analyzer最新
 The application allows users to upload medical images, perform segmentation with ANTsPyNet,
 and generate a structured report using the Gemini API.
 
+## Disclaimer
+
+This project provides an experimental AI assistant for drafting radiology reports.
+Generated results may contain inaccuracies and must not be used for final medical
+diagnosis. Always verify and edit the output with a qualified professional.
+
 ## Development
 
 Create a Python 3.11 virtual environment and install dependencies:

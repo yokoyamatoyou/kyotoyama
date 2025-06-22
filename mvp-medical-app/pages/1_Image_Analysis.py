@@ -16,6 +16,10 @@ def cached_report(orig, prob, key):
 st.set_page_config(page_title="Image Analysis")
 
 st.title("Upload Medical Image")
+st.info(
+    "This tool is an experimental AI assistant for drafting radiology reports. "
+    "Results may contain inaccuracies and should not be used for final diagnosis."
+)
 
 uploaded_file = st.file_uploader("Upload image", type=["nii", "nii.gz", "png", "jpg"])
 

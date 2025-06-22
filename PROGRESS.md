@@ -6,3 +6,4 @@
 - Implemented caching and layout improvements for image analysis page.
 - Added unit tests for analysis and report modules.
 - Added updated development plan and adjusted documentation.
+- Added disclaimer to image analysis page and README.
