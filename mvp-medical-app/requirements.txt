@@ -4,3 +4,4 @@ antspyx==0.4.3
 antspynet==1.0.3
 tensorflow==2.16.1
 pydantic==2.7.4
+pillow==10.3.0
