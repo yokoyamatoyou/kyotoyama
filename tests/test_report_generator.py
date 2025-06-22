@@ -7,6 +7,9 @@ sys.modules['openai'] = mock.Mock()
 sys.modules['PIL'] = mock.Mock()
 sys.modules['PIL.Image'] = mock.Mock()
 sys.modules['PIL'].Image = mock.Mock()
+sys.modules['ants'] = mock.Mock()
+sys.modules['antspynet'] = mock.Mock()
+sys.modules['antspynet.utilities'] = mock.Mock()
 
 sys.path.insert(0, os.path.abspath('mvp-medical-app'))
 from modules import report_generator
@@ -29,8 +32,10 @@ def test_generate_structured_report_uses_api_key():
     prob_arr.__mul__.return_value = prob_arr
     prob_arr.astype.return_value = []
     prob = mock.Mock(); prob.numpy.return_value = prob_arr
-    with mock.patch.object(report_generator.LesionFinding, 'model_validate_json', return_value={'ok': True}):
+    with mock.patch.object(report_generator, 'mask_patient_info', return_value=img) as mask_mock, \
+         mock.patch.object(report_generator.LesionFinding, 'model_validate_json', return_value={'ok': True}):
         result = report_generator.generate_structured_report(img, prob, 'key')
+    mask_mock.assert_called_once_with(img)
     openai_mock.OpenAI.assert_called_once_with(api_key='key')
     completion_mock.assert_called_once()
     assert result == {'ok': True}
