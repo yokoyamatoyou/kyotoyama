@@ -1,1 +1,29 @@
-# kyotoyama
+# Kyotoyama Medical Image Analyzer
+
+This repository contains an MVP for a Streamlit-based medical image analysis application.
+The project follows the plan outlined in `GoogleクラウドMRI病変検出MVP開発案_.md`.
+
+The application allows users to upload medical images, perform segmentation with ANTsPyNet,
+and generate a structured report using the Gemini API.
+
+## Development
+
+Create a Python 3.11 virtual environment and install dependencies:
+
+```bash
+python -m venv .venv
+source .venv/bin/activate
+pip install -r mvp-medical-app/requirements.txt
+```
+
+Run the Streamlit app:
+
+```bash
+streamlit run mvp-medical-app/app.py
+```
+
+Run tests:
+
+```bash
+pytest
+```
