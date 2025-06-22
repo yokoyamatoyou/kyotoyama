@@ -1,6 +1,7 @@
 import sys
 import os
 from unittest import mock
+import numpy as np
 
 # Patch heavy modules before import
 sys.modules['ants'] = mock.Mock()
@@ -33,3 +34,19 @@ def test_save_overlay_png_uses_pil(tmp_path):
         image_analyzer.save_overlay_png('img', 'mask', out)
         create_mock.assert_called_once_with('img', 'mask', (255, 0, 0), 0.3)
         overlay_img.save.assert_called_once_with(out, format='PNG')
+
+
+def test_mask_patient_info_zeroes_top():
+    img = mock.Mock()
+    arr = np.ones((10, 10))
+    img.numpy.return_value = arr
+    img.origin = 'o'
+    img.spacing = 's'
+    img.direction = 'd'
+    with mock.patch.object(image_analyzer.ants, "from_numpy", return_value="new") as fn:
+        result = image_analyzer.mask_patient_info(img, 0.2)
+        modified = fn.call_args[0][0]
+    assert np.all(modified[:2] == 0)
+    assert np.all(modified[2:] == 1)
+    fn.assert_called_once()
+    assert result == 'new'
