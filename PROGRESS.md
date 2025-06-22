@@ -8,3 +8,4 @@
 - Added updated development plan and adjusted documentation.
 - Added disclaimer to image analysis page and README.
 - Switched report generation to GPT-4.1mini via OpenAI API, updating tests and docs.
+- Implemented overlay PNG output utility and added Pillow dependency.

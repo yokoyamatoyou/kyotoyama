@@ -24,3 +24,12 @@ def test_analyze_image_calls_brain_extraction(tmp_path):
         assert result['probability_mask'] == 'prob'
         assert result['segmentation_mask'] == 'mask'
         brain_extraction_mock.assert_called_once_with('image', modality='t1')
+
+
+def test_save_overlay_png_uses_pil(tmp_path):
+    overlay_img = mock.Mock()
+    with mock.patch.object(image_analyzer, 'create_overlay_image', return_value=overlay_img) as create_mock:
+        out = tmp_path / 'ov.png'
+        image_analyzer.save_overlay_png('img', 'mask', out)
+        create_mock.assert_called_once_with('img', 'mask', (255, 0, 0), 0.3)
+        overlay_img.save.assert_called_once_with(out, format='PNG')
