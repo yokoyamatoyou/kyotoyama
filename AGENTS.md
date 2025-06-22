@@ -1,6 +1,6 @@
 # Codex Instructions
 
-This repository implements the medical image analysis MVP described in `GoogleクラウドMRI病変検出MVP開発案_.md`.
+This repository implements the medical image analysis MVP described in `Kyotoyama_Medical_Image_Analyzer最新版MVP設計・進捗管理.md`.
 
 ## Guidelines for Codex
 
