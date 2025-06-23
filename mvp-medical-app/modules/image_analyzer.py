@@ -1,4 +1,5 @@
 import tempfile
+import io
 import numpy as np
 from PIL import Image
 import ants
@@ -36,6 +37,14 @@ def save_overlay_png(original_image, segmentation_mask, output_path, color=(255,
     """Save an overlay PNG image combining original and mask."""
     overlay = create_overlay_image(original_image, segmentation_mask, color, alpha)
     overlay.save(output_path, format="PNG")
+
+
+def overlay_png_bytes(original_image, segmentation_mask, color=(255, 0, 0), alpha=0.3) -> bytes:
+    """Return overlay image bytes in PNG format."""
+    overlay = create_overlay_image(original_image, segmentation_mask, color, alpha)
+    buf = io.BytesIO()
+    overlay.save(buf, format="PNG")
+    return buf.getvalue()
 
 
 
