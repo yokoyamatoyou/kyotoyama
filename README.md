@@ -4,7 +4,7 @@ This repository contains an MVP for a Streamlit-based medical image analysis app
 The project follows the plan outlined in `Kyotoyama_Medical_Image_Analyzer最新版MVP設計・進捗管理.md`.
 
 The application allows users to upload medical images, perform segmentation with ANTsPyNet,
-and generate a structured report using the GPT-4.1mini API.
+generate a structured report using the GPT-4.1mini API, and store simple image comments.
 
 ## Disclaimer
 
@@ -27,6 +27,8 @@ Run the Streamlit app:
 ```bash
 streamlit run mvp-medical-app/app.py
 ```
+
+Set `COMMENT_DB_PATH` to control where comments are stored (defaults to `comments.db`).
 
 Run tests:
 
