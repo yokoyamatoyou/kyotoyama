@@ -12,6 +12,8 @@ This project provides an experimental AI assistant for drafting radiology report
 Generated results may contain inaccuracies and must not be used for final medical
 diagnosis. Always verify and edit the output with a qualified professional.
 
+The app can also extract burned-in text from uploaded images using GPT-4.1mini OCR.
+
 ## Development
 
 Create a Python 3.11 virtual environment and install dependencies:
