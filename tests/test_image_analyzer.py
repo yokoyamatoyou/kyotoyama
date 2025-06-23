@@ -36,6 +36,15 @@ def test_save_overlay_png_uses_pil(tmp_path):
         overlay_img.save.assert_called_once_with(out, format='PNG')
 
 
+def test_overlay_png_bytes_returns_bytes():
+    overlay_img = mock.Mock()
+    with mock.patch.object(image_analyzer, 'create_overlay_image', return_value=overlay_img) as create_mock:
+        overlay_img.save.side_effect = lambda buf, format=None: buf.write(b'data')
+        result = image_analyzer.overlay_png_bytes('img', 'mask')
+        create_mock.assert_called_once_with('img', 'mask', (255, 0, 0), 0.3)
+        assert result == b'data'
+
+
 def test_mask_patient_info_zeroes_top():
     img = mock.Mock()
     arr = np.ones((10, 10))

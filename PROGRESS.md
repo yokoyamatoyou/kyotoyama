@@ -13,3 +13,4 @@
 - Integrated patient info masking into GPT report generation and updated tests.
 - Added SQLite-based comment feature with new Streamlit page and tests.
 - Added GPT-based OCR feature with caching and tests.
+- Enabled overlay PNG download in the image analysis page and documented usage.

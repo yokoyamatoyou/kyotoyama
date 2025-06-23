@@ -1,5 +1,5 @@
 import streamlit as st
-from modules.image_analyzer import analyze_image
+from modules.image_analyzer import analyze_image, overlay_png_bytes
 from modules.report_generator import generate_structured_report
 from modules.ocr import extract_burned_in_text
 from modules.comments import add_comment
@@ -41,6 +41,17 @@ if uploaded_file:
     col1, col2 = st.columns(2)
     col1.image(results["original_image"].numpy(), caption="Original")
     col2.image(results["segmentation_mask"].numpy(), caption="Mask")
+
+    overlay_bytes = overlay_png_bytes(
+        results["original_image"],
+        results["segmentation_mask"],
+    )
+    st.download_button(
+        "Download Overlay PNG",
+        overlay_bytes,
+        file_name=f"{uploaded_file.name}_overlay.png",
+        mime="image/png",
+    )
 
     api_key = os.environ.get("GEMINI_API_KEY")
     if api_key:
