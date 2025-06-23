@@ -5,3 +5,5 @@ antspynet==1.0.3
 tensorflow==2.16.1
 pydantic==2.7.4
 pillow==10.3.0
+pydicom==2.4.4
+pynetdicom==2.0.2
