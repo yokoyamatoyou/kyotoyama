@@ -43,3 +43,13 @@ def list_comments(db_path: str | Path, image_name: Optional[str] = None) -> List
     return [
         {"id": r[0], "image_name": r[1], "text": r[2]} for r in rows
     ]
+
+
+def update_comment(db_path: str | Path, comment_id: int, new_text: str) -> None:
+    """Update the text of an existing comment."""
+    with _ensure_db(Path(db_path)) as conn:
+        conn.execute(
+            "UPDATE comments SET text = ? WHERE id = ?",
+            (new_text, comment_id),
+        )
+        conn.commit()

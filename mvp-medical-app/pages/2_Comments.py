@@ -1,6 +1,6 @@
 import os
 import streamlit as st
-from modules.comments import add_comment, list_comments
+from modules.comments import add_comment, list_comments, update_comment
 
 DB_PATH = os.environ.get("COMMENT_DB_PATH", "comments.db")
 
@@ -22,3 +22,12 @@ st.subheader("Stored Comments")
 comments = list_comments(DB_PATH, image_name if image_name else None)
 for c in comments:
     st.markdown(f"**{c['image_name']}**: {c['text']}")
+
+st.subheader("Edit Comment")
+comment_ids = [str(c["id"]) for c in comments]
+if comment_ids:
+    selected_id = st.selectbox("Comment ID", comment_ids)
+    new_text = st.text_area("New text", key="edit")
+    if st.button("Update Comment"):
+        update_comment(DB_PATH, int(selected_id), new_text)
+        st.success("Comment updated")
