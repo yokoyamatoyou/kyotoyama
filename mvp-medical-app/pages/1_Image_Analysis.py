@@ -1,6 +1,7 @@
 import streamlit as st
 from modules.image_analyzer import analyze_image
 from modules.report_generator import generate_structured_report
+from modules.ocr import extract_burned_in_text
 from modules.comments import add_comment
 import os
 
@@ -15,6 +16,11 @@ def cached_analyze(data: bytes):
 @st.cache_resource
 def cached_report(orig, prob, key):
     return generate_structured_report(orig, prob, key)
+
+
+@st.cache_resource
+def cached_ocr(image, key):
+    return extract_burned_in_text(image, key)
 
 st.set_page_config(page_title="Image Analysis")
 
@@ -46,6 +52,12 @@ if uploaded_file:
             )
         if report:
             st.json(report.model_dump())
+
+        with st.spinner("Extracting burned-in text..."):
+            text = cached_ocr(results["original_image"], api_key)
+        if text:
+            st.subheader("Burned-in Text")
+            st.text(text)
     else:
         st.warning("GEMINI_API_KEY not set")
 
