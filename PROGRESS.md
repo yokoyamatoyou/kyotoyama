@@ -15,3 +15,4 @@
 - Added GPT-based OCR feature with caching and tests.
 - Enabled overlay PNG download in the image analysis page and documented usage.
 - Added comment editing support with update function, UI changes, and tests.
+- Added DICOM series load/save utilities with tests.

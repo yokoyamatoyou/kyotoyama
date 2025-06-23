@@ -4,4 +4,6 @@ __all__ = [
     'image_analyzer',
     'report_generator',
     'comments',
+    'ocr',
+    'dicom',
 ]
