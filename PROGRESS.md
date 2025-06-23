@@ -11,3 +11,4 @@
 - Implemented overlay PNG output utility and added Pillow dependency.
 - Implemented patient info masking utility with corresponding unit test.
 - Integrated patient info masking into GPT report generation and updated tests.
+- Added SQLite-based comment feature with new Streamlit page and tests.

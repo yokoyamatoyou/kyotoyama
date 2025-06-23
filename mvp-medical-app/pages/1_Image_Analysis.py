@@ -1,7 +1,10 @@
 import streamlit as st
 from modules.image_analyzer import analyze_image
 from modules.report_generator import generate_structured_report
+from modules.comments import add_comment
 import os
+
+DB_PATH = os.environ.get("COMMENT_DB_PATH", "comments.db")
 
 
 @st.cache_resource
@@ -45,3 +48,9 @@ if uploaded_file:
             st.json(report.model_dump())
     else:
         st.warning("GEMINI_API_KEY not set")
+
+    st.subheader("Add Comment")
+    comment = st.text_area("Comment")
+    if st.button("Save Comment"):
+        add_comment(DB_PATH, uploaded_file.name, comment)
+        st.success("Comment saved")
